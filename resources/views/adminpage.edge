@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>"Admin Dashboard"</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+  
+  <div class="container">
+    <h1>Welcome to the Admin Dashboard</h1>
+  
+    <!-- Display admin information -->
+    <h2>Admin Information:</h2>
+    <h1>Welcome, <span id="username">{{ user.username || '' }}</span>!</h1>
+    <p>Name: <span id="name">{{ user.name || '' }}</span></p>
+    <p>Age: <span id="age">{{ user.age || '' }}</span></p>
+    <p>Occupation: <span id="occupation">{{ user.occupation || '' }}</span></p>
+    <p>Your account has been logged in.</p>
+  
+    <!-- Navigation bar with search functionality -->
+    <nav>
+      <ul>
+        <li><a href="/dashboard/{{ user.username || '' }}">Home</a></li>
+        <li><a href="/dashboard/{{ user.username || '' }}/createUser" method="get">Create Users</a></li>
+      </ul>
+    </nav>
+    
+    <!-- Rest of your content goes here -->
+    
+  </div>
+  <form action="/dashboard/{{ user.username || '' }}/uploadUser" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="userFile">Upload Users CSV:</label>
+      <input type="file" class="form-control-file" id="userFile" name="userFile" accept=".csv">
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+  </form>
+  
+  <!-- User Account Table -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Occupation</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="user-table-body">
+      @each (dt in data) 
+        <tr>
+          <td>{{ dt.name }}</td>
+          <td>{{ dt.age }}</td>
+          <td>{{ dt.occupation }}</td>
+          <td>{{ dt.username }}</td>
+          <td>{{ dt.password }}</td>
+          <td>
+            <div class="btn-group" role="group">
+              <form action="/dashboard/{{ user.username || '' }}/editUser" method="POST" style="display: inline;">
+                <input type="hidden" name="username" value="{{ dt.username }}">
+                <input type="hidden" name="name" value="{{ dt.name }}">
+                <input type="hidden" name="occupation" value="{{ dt.occupation }}">
+                <input type="hidden" name="age" value="{{ dt.age }}">
+                <input type="hidden" name="password" value="{{ dt.password }}">
+                <button type="submit" class="btn btn-primary">Edit</button>
+              </form>
+              <form action="/dashboard/{{ user.username || '' }}/deleteUser" method="POST" style="display: inline;">
+                <input type="hidden" name="username" value="{{ dt.username }}">
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      @end
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+ @if (size > 0) 
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      @if (page > 1) 
+        <li class="page-item"><a class="page-link" href="/dashboard/{{ user.username || '' }}?page={{ parseInt(page) - 1 }}">Previous</a></li>
+      @endif
+      @each(anchor in data.getUrlsForRange(1, data.lastPage))
+        <a class="page-link" href="/dashboard/{{ user.username || '' }}{{ anchor.url }}">
+          {{ anchor.page }}
+        </a>
+      @endeach
+      @if (page < Math.ceil(size / 5)) 
+        <li class="page-item"><a class="page-link" href="/dashboard/{{ user.username || '' }}/?page={{ parseInt(page) + 1 }}">Next</a></li>
+      @endif
+    </ul>
+  </nav>
+  @endif
+
+  <form action="/logout" method="GET">
+    <button type="submit">Logout</button>
+  </form>
+</body>
+</html>

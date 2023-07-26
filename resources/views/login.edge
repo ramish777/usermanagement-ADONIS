@@ -1,0 +1,121 @@
+{{--  @{
+  const pageTitle = "Page Title";
+}  --}}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+    html, body {
+      background-color: #F7F8FA;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      color: #46444c;
+      position: relative;
+    }
+
+    body:before {
+      content: '';
+      background: #5A45FF;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      position: absolute;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      color: #5A45FF;
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 620px;
+      margin: auto;
+      height: 100vh;
+      padding: 0 30px;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    .title {
+      font-size: 50px;
+      line-height: 50px;
+      margin-bottom: 10px;
+      color: #17161A;
+    }
+
+    .subtitle {
+      font-size: 26px;
+      margin-bottom: 40px;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    main ul {
+      list-style: none;
+    }
+
+    main li {
+      margin-bottom: 5px;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    main li:before {
+      content: '—';
+      position: absolute;
+      left: 0;
+    }
+
+    main code {
+      font-size: 16px;
+      background: #e6e2ff;
+    }
+  </style>
+  </head>
+  <body>
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+          <img src="C:\Users\deel 5520\Desktop\pic.jpg" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- Login Form -->
+        <form action="/login" method="POST">
+          <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+          @if(flashMessages.has('errors.login'))
+            <p> {{ flashMessages.get('errors.login') }} </p>
+          @end
+          <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+          @if(flashMessages.has('errors.password'))
+            <p> {{ flashMessages.get('errors.password') }} </p>
+          @end
+          <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+          <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

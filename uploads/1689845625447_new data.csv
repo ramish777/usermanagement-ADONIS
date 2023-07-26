@@ -1,0 +1,11 @@
+﻿name,username,password,occupation,age
+John Doe,johndoe@example.com,pass123,Engineer,30
+Jane Smith,janesmith@example.com,password456,Teacher,25
+David Johnson,davidjohnson@example.com,securepwd,Doctor,35
+Sarah Williams,sarahwilliams@example.com,mysecretpass,Lawyer,28
+Michael Brown,michaelbrown@example.com,p@ssw0rd,Accountant,32
+Emily Davis,emilydavis@example.com,12345678,Writer,29
+Daniel Wilson,danielwilson@example.com,wilson123,Architect,31
+Olivia Anderson,oliviaanderson@example.com,pass1234,Graphic Designer,27
+James Martinez,jamesmartinez@example.com,pwd12345,Marketing Manager,33
+Sophia Lee,sophialee@example.com,pa55word,Software Developer,26
